@@ -1,0 +1,104 @@
+<!-- src/components/AboutUs.astro -->
+
+---
+const title = 'About Us';
+const leftContent = {
+    description: 'We are Akeshya, a firm that specializes in web design and marketing. We help transform ideas into reality with a team of passionate graphic designers, web developers, and seasoned marketing advisors.',
+    listItems: [
+        'Web Design',
+        'Graphic Design',
+        'SEO'
+    ]
+};
+const rightContent = {
+    additionalDescription: "We're professional, but we're also friendly, and we'll always pay attention to your concerns. We expect to work with innovative people that have an open mind and are dedicated to making every idea a reality. We want to hear from you if you're interested in SEO, have Web Development ideas, or require a graphic designer who can match your goals."
+};
+---
+
+<section class="about-us-section">
+    <div class="about-us-container">
+        <div class="left-content">
+            <h2>{title}</h2>
+            <p>{leftContent.description}</p>
+            <ul>
+                {leftContent.listItems.map(item => (
+                    <li>{item}</li>
+                ))}
+            </ul>
+        </div>
+        <div class="right-content">
+            <p>{rightContent.additionalDescription}</p>
+            <button class="contact-button">Contact Us</button>
+        </div>
+    </div>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+        .about-us-section {
+            background-color: #f9f9f9;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .about-us-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .left-content {
+            flex: 1;
+            padding-right: 20px;
+            text-align: left;
+        }
+
+        .right-content {
+            flex: 1;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        p {
+            font-size: 1.6rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        li {
+            font-size: 1.6rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #162be8;
+            color: #f3f5f8;
+            font-size: 1.25rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background-color: #1b18dc;
+        }
+    </style>
+</section>

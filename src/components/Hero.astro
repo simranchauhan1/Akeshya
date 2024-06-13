@@ -1,6 +1,15 @@
 ---
 const title = 'Grow your business with Akeshya';
 const subtitle = 'We are team of talented website designers and developers & digital marketeers.';
+const clients = [
+    { src: '../public/images/client-1.png', alt: 'Client 1' },
+    { src: '../public/images/client-2.png', alt: 'Client 2' },
+    { src: '../public/images/client-3.png', alt: 'Client 3' },
+    { src: '../public/images/client-4.png', alt: 'Client 4' },
+    { src: '../public/images/client-5.png', alt: 'Client 5' },
+    { src: '../public/images/client-6.png', alt: 'Client 6' }
+];
+
 ---
 <section class="hero-section">
     <div class="hero-container">
@@ -11,6 +20,13 @@ const subtitle = 'We are team of talented website designers and developers & dig
         </div>
         <div class="image-content">
             <img class="animated-image" src="./public/images/hero-img.png" alt="Animated Image">
+        </div>
+    </div>
+    <div class="client-section">
+        <div class="client-logos">
+            {clients.map(client => (
+                <img src={client.src} alt={client.alt} class="client-logo" />
+            ))}
         </div>
     </div>
     <style>
@@ -82,7 +98,33 @@ const subtitle = 'We are team of talented website designers and developers & dig
             display: block;
             animation: float 3s ease-in-out infinite;
         }
-        
+
+        .client-section{
+            margin-left: 9rem;
+            margin-right: 9rem;
+            background-color: rgb(243, 249, 253)
+        }
+
+        .client-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+        .client-logo {
+            max-width: 100px;
+            height: auto;
+            filter: grayscale(100%); /* Make the image black and white */
+            transition: filter 0.3s ease; /* Smooth transition */
+        }
+        .client-logo:hover {
+            filter: grayscale(0%); /* Restore original color on hover */
+        }
+            
         @keyframes float {
             0%, 100% {
                 transform: translatey(0);
@@ -90,6 +132,13 @@ const subtitle = 'We are team of talented website designers and developers & dig
             50% {
                 transform: translatey(-10px);
             }
-        }
+
+            .client-section {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            }
+        
+        } 
     </style>
 </section>
