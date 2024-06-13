@@ -1,0 +1,90 @@
+<!-- src/components/Services.astro -->
+
+---
+const title = 'SERVICES';
+const description = 'Akeshya will serve as your consultant and development partner to help you turn your idea into a reality.';
+const services = [
+    { title: 'Design', description: "Our web design services can assist you in reclaiming your company's online image. Your business will flourish on the Internet thanks to the combination of style and technology we provide, as well as our experience." },
+    { title: 'Development', description: "Our development team can construct platforms to help your business thrive by creating powerful customised solutions tailored to your particular requirements. Akeshya makes use of established and effective web development tools." },
+    { title: 'Marketing', description: "A beautiful website is the foundation of effective marketing. Our customers achieve success where it counts—in the real world—by combining our proven approach with our passion for improving conversions and increasing ROI." },
+    { title: 'Support', description: "Since the beginning, we at Akeshya have specialised in website maintenance. We recognise the significance of having your business online 24 hours a day, seven days a week, and we've created a system to ensure that we're always available." }
+];
+---
+
+<section class="services-section">
+    <h2>{title}</h2>
+    <p class="services-description">{description}</p>
+    <div class="services-container">
+        {services.map(service => (
+            <div class="service-box">
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+            </div>
+        ))}
+    </div>
+
+<!--CSS Styles -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+        
+
+        .services-section {
+            background-color: #f9f9f9;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .services-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+           
+        }
+
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .service-box {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            flex: 1 1 calc(25% - 20px); /* Responsive layout with gap */
+            min-width: 200px; /* Ensure minimum width */
+            text-align: left;
+            max-width: 250px;
+            transition: background-color 0.3s ease;
+        }
+
+        .service-box:hover  {
+            background-color: #1f19d4; /* Blue color */
+            color: #fff; /* White text */
+        }
+
+        .service-box:hover h3,
+        .service-box:hover p {
+            color: #fff; /* White text */
+        }
+
+        .service-box h3 {
+            font-size: 1.5rem;
+            color: #0e0d0d;
+            margin: 0 0 10px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .service-box p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+</section>
