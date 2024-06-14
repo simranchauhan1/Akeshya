@@ -9,17 +9,17 @@ const clients = [
     { src: '../public/images/client-5.png', alt: 'Client 5' },
     { src: '../public/images/client-6.png', alt: 'Client 6' }
 ];
-
 ---
+
 <section class="hero-section">
     <div class="hero-container">
         <div class="text-content">
-            <h1>{title}</h1>
-            <p>{subtitle}</p>
-            <button class="start-button">Get Started</button>
+            <h1 class="animate-heading">{title}</h1>
+            <p class="animate-paragraph">{subtitle}</p>
+            <button class="start-button animate-button">Get Started</button>
         </div>
         <div class="image-content">
-            <img class="animated-image" src="./public/images/hero-img.png" alt="Animated Image">
+            <img class="animated-image" src="../public/images/hero-img.png" alt="Animated Image">
         </div>
     </div>
     <div class="client-section">
@@ -30,113 +30,145 @@ const clients = [
         </div>
     </div>
     <style>
-
     @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 
-        .hero-section{
-            background: white;
-            width: 100%;
-            height: 70vh;
-        }
-        .hero-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        
-        .text-content {
-            flex: 1;
-            padding-right: 20px;
-            margin-left: 7rem;
-        }
-        
-        .text-content h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            color: rgb(20, 39, 155);
-            font-family: Raleway, sans-serif;
-        }
-        
-        .text-content p {
-            font-size: 1.60rem;
-            line-height: 1.2;
-            color: rgb(72, 72, 72);
-        }
-        
-        .start-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #f3f5f8;
-            color: #162be8;
-            font-size: 1.25rem;
-            border: 2px solid #162be8; 
-            cursor: pointer;
-            border-radius: 50px;
-            transition: background-color 0.3s ease;
-        }
-        
-        .start-button:hover {
-            background-color: #1b18dc;
-            color: #f3f5f8 ;
-        }
-        
-        .image-content {
-            flex: 1;
-            text-align: center;
-            position: relative;
-        }
-        
-        .animated-image {
-            margin-right: 7rem;
-            max-width: 100%;
-            height: auto;
-            display: block;
-            animation: float 3s ease-in-out infinite;
-        }
+    .hero-section {
+        background: white;
+        width: 100%;
+        height: 70vh;
+    }
 
-        .client-section{
-            margin-left: 9rem;
-            margin-right: 9rem;
-            background-color: rgb(243, 249, 253)
-        }
+    .hero-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
 
-        .client-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-        }
-        .client-logo {
-            max-width: 100px;
-            height: auto;
-            filter: grayscale(100%); /* Make the image black and white */
-            transition: filter 0.3s ease; /* Smooth transition */
-        }
-        .client-logo:hover {
-            filter: grayscale(0%); /* Restore original color on hover */
-        }
-            
-        @keyframes float {
-            0%, 100% {
-                transform: translatey(0);
-            }
-            50% {
-                transform: translatey(-10px);
-            }
+    .text-content {
+        flex: 1;
+        padding-right: 20px;
+        margin-left: 7rem;
+    }
 
-            .client-section {
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-            }
-        
-        } 
+    .text-content h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        color: rgb(20, 39, 155);
+        font-family: Raleway, sans-serif;
+        opacity: 0; /* Start with invisible */
+    }
+
+    .text-content p {
+        font-size: 1.60rem;
+        line-height: 1.2;
+        color: rgb(72, 72, 72);
+        opacity: 0; /* Start with invisible */
+    }
+
+    .start-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #f3f5f8;
+        color: #162be8;
+        font-size: 1.25rem;
+        border: 2px solid #162be8;
+        cursor: pointer;
+        border-radius: 50px;
+        transition: background-color 0.3s ease;
+        opacity: 0; /* Start with invisible */
+    }
+
+    .start-button:hover {
+        background-color: #1b18dc;
+        color: #f3f5f8;
+    }
+
+    .image-content {
+        flex: 1;
+        text-align: center;
+        position: relative;
+    }
+
+    .animated-image {
+        margin-right: 7rem;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        animation: slideInRight 1s ease-out forwards;
+        opacity: 0; /* Start with invisible */
+    }
+
+    .client-section {
+        background-color: rgb(243, 249, 253);
+        padding: 20px 0; /* Add padding to the top and bottom */
+    }
+
+    .client-logos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 0 auto; /* Center the logos horizontally */
+        max-width: 80%; /* Restrict the width of the logos container */
+    }
+
+    .client-logo {
+        max-width: 100px;
+        height: auto;
+        filter: grayscale(100%);
+        transition: filter 0.3s ease;
+    }
+
+    .client-logo:hover {
+        filter: grayscale(0%);
+    }
+
+    @keyframes slideInRight {
+        0% {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInBottom {
+        0% {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Apply animations */
+    .animate-heading {
+        animation: slideInBottom 1s ease-out forwards;
+    }
+
+    .animate-paragraph {
+        animation: slideInBottom 1s ease-out forwards;
+        animation-delay: 0.5s; /* Optional: Add delay for the paragraph animation */
+    }
+
+    .animate-button {
+        animation: slideInBottom 1s ease-out forwards;
+        animation-delay: 1s; /* Optional: Add delay for the button animation */
+    }
+
+    .animated-image {
+        animation-delay: 0.5s;
+    }
     </style>
 </section>
