@@ -96,7 +96,7 @@ const services = [
             margin-bottom: 10px;
             border: 10px solid #1f19d4; /* Thick border */
             border-radius: 50%; /* Circular border */
-            padding: 3px;
+            padding: 10px;
         }
 
         .service-box:hover .service-icon {

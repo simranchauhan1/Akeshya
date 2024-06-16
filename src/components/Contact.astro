@@ -1,0 +1,193 @@
+<!-- src/components/ContactUs.astro -->
+
+---
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkerAlt, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
+
+const title = 'Contact Us';
+const companyName = 'Akeshya';
+const companyDescription = 'We are here to assist you. Reach out to us for any inquiries or support.';
+const address = '26-2-789, 7th street, Jyothi Nagar, Nellore, Andhra Pradesh 524004';
+const email = 'info@akeshya.com';
+const phone = '+91 94942 40922';
+---
+
+<section class="contact-us-section">
+    <h2>{title}</h2>
+    <div class="contact-us-container">
+        <div class="contact-box">
+            <h3>{companyName}</h3>
+            <p>{companyDescription}</p>
+        </div>
+        <div class="contact-box">
+            <h3>Contact Information</h3>
+            <div class="contact-item">
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="contact-icon" />
+                <p>{address}</p>
+            </div>
+            <div class="contact-item">
+                <FontAwesomeIcon icon={faEnvelope} className="contact-icon" />
+                <p>{email}</p>
+            </div>
+            <div class="contact-item">
+                <FontAwesomeIcon icon={faPhone} className="contact-icon" />
+                <p>{phone}</p>
+            </div>
+        </div>
+        <div class="contact-box">
+            <h3>Contact Form</h3>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required />
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+<!-- CSS Styles -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+        .contact-us-section {
+            background-color: #f9f9f9;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            overflow: hidden; /* Ensure smooth animation */
+        }
+
+        .contact-us-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .contact-box {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            flex: 1 1 calc(45% - 20px); /* Make the boxes wider */
+            min-width: 300px; /* Ensure minimum width */
+            max-width: 400px; /* Ensure maximum width */
+            text-align: left;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Add transition for animation */
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.6s forwards; /* Apply the animation */
+        }
+
+        .contact-box h3 {
+            font-size: 1.5rem;
+            color: #0e0d0d;
+            margin: 0 0 10px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .contact-box p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+            font-family: 'Open Sans', sans-serif;
+            margin: 5px 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-icon {
+            font-size: 1rem;
+            height: 2rem;
+            color: #1f19d4;
+            margin-right: 10px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-size: 1rem;
+            color: #0e0d0d;
+            font-family: 'Raleway', sans-serif;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1f19d4;
+        }
+
+        button[type="submit"] {
+            background-color: #1f19d4;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-family: 'Raleway', sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0e0d0d;
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Staggered animation delays */
+        .contact-box:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .contact-box:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .contact-box:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+    </style>
+</section>
