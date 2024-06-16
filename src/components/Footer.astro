@@ -1,0 +1,58 @@
+---
+const footerLinks = [
+    { title: 'Terms and Conditions', href: '/terms-and-conditions' },
+    { title: 'Refund Policy', href: '/refund-policy' },
+    { title: 'Privacy Policy', href: '/privacy-policy' }
+];
+---
+
+<footer class="footer-section">
+    <div class="container">
+        <div class="copyright">
+            <p>© Copyright Akeshya. All Rights Reserved</p>
+        </div>
+        <div class="footer-links">
+            {footerLinks.map((link, index) => (
+                <a href={link.href} key={index}>{link.title}</a>
+            ))}
+        </div>
+    </div>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+        .footer-section {
+            background-color: #fff;
+            color: #222;
+            padding: 20px 0;     
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .copyright {
+            text-align: left;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #007bff; /* Blue color for the links */
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</footer>

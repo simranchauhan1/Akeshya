@@ -1,34 +1,88 @@
----
-export function HeadingWithLines({ headingText }) {
-  return (
-    <div class="heading-with-lines">
-      <div class="line"></div>
-      <h1 class="heading">{headingText}</h1>
-      <div class="line"></div>
-    </div>
-  );
-}
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reusable Heading Component</title>
+    <style>
+        .heading-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .heading-line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: #000;
+            margin: 0 10px;
+        }
+        .heading-text {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
 
-<style>
-  .heading-with-lines {
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    max-width: 800px; /* Adjust as needed */
-    position: relative;
-  }
+<custom-heading text="ABOUT US"></custom-heading>
+<custom-heading text="SERVICES"></custom-heading>
+<custom-heading text="OUR PROCESS"></custom-heading>
+<custom-heading text="OUR CORE FEATURES"></custom-heading>
+<custom-heading text="CONTACT"></custom-heading>
 
-  .line {
-    flex-grow: 1;
-    height: 2px;
-    background-color: #000; /* Adjust color as needed */
-  }
+<script>
+    class CustomHeading extends HTMLElement {
+        constructor() {
+            super();
+            const shadow = this.attachShadow({ mode: 'open' });
 
-  .heading {
-    margin: 0 20px; /* Adjust spacing between lines and heading */
-    font-size: 2rem; /* Adjust font size as needed */
-    color: #333; /* Adjust heading color */
-    font-family: Arial, sans-serif; /* Adjust font family */
-  }
-</style>
+            const container = document.createElement('div');
+            container.className = 'heading-container';
+
+            const line1 = document.createElement('div');
+            line1.className = 'heading-line';
+
+            const text = document.createElement('div');
+            text.className = 'heading-text';
+            text.textContent = this.getAttribute('text');
+
+            const line2 = document.createElement('div');
+            line2.className = 'heading-line';
+
+            container.appendChild(line1);
+            container.appendChild(text);
+            container.appendChild(line2);
+
+            const style = document.createElement('style');
+            style.textContent = `
+                .heading-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 20px 0;
+                }
+                .heading-line {
+                    flex-grow: 1;
+                    height: 1px;
+                    background-color: #000;
+                    margin: 0 10px;
+                }
+                .heading-text {
+                    font-size: 24px;
+                    font-weight: bold;
+                    text-align: center;
+                }
+            `;
+
+            shadow.appendChild(style);
+            shadow.appendChild(container);
+        }
+    }
+
+    customElements.define('custom-heading', CustomHeading);
+</script>
+
+</body>
+</html>

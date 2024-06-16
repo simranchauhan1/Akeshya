@@ -1,11 +1,9 @@
-<!-- src/components/Statistics.astro -->
-
 ---
 const stats = [
-    { title: 'Organic Reach (Global)', count: '3,835,039', description: 'Organic Reach' },
+    { title: 'Organic Reach (Global)', count: '3835039', description: 'Organic Reach' },
     { title: 'Campaigns', count: '85', description: 'Successful campaigns' },
-    { title: 'Watch Hours (Asia)', count: '14,081', description: 'Total watch hours in Asia' },
-    { title: 'Excellent CTR % (Asia)', count: '17%', description: 'Click-through rate in Asia' }
+    { title: 'Watch Hours (Asia)', count: '14081', description: 'Total watch hours in Asia' },
+    { title: 'Excellent CTR % (Asia)', count: '17', description: 'Click-through rate in Asia' }
 ];
 ---
 
@@ -15,9 +13,9 @@ const stats = [
             <img src="./public/images/counts-img.svg" alt="Statistics Image" />
         </div>
         <div class="stats-container">
-            {stats.map(stat => (
-                <div class="stat-box">
-                    <h3>{stat.count}</h3>
+            {stats.map((stat, index) => (
+                <div class="stat-box" key={index}>
+                    <h3 class="count" data-count={stat.count}>{stat.count}</h3>
                     <p class="title">{stat.title}</p>
                     <p class="description">{stat.description}</p>
                 </div>
@@ -66,13 +64,11 @@ const stats = [
         }
 
         .stat-box {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
             flex: 1 1 calc(25% - 20px); /* Responsive layout with gap */
             min-width: 200px; /* Ensure minimum width */
             text-align: center;
+            transition: transform 0.3s ease;
         }
 
         .stat-box h3 {
@@ -80,6 +76,7 @@ const stats = [
             color: #0e0d0d;
             margin: 0;
             font-family: 'Raleway', sans-serif;
+            position: relative;
         }
 
         .stat-box p.title {
@@ -95,5 +92,53 @@ const stats = [
             margin-top: 5px;
             font-family: 'Open Sans', sans-serif;
         }
+
+        /* Animation keyframes */
+        @keyframes countUp {
+            0% {
+                content: attr(data-count-start);
+            }
+            100% {
+                content: attr(data-count);
+            }
+        }
+
+        .count {
+            display: inline-block;
+            animation: countUp 2s ease-out forwards;
+        }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const countElements = document.querySelectorAll('.count');
+            countElements.forEach(el => {
+                const countTo = el.getAttribute('data-count');
+                animateCount(el, countTo);
+            });
+        });
+
+        function animateCount(element, to) {
+            let start = 0;
+            const end = parseInt(to, 10);
+            const duration = 2000;
+            const range = end - start;
+            const stepTime = Math.abs(Math.floor(duration / range));
+            const startTime = new Date().getTime();
+            const endTime = startTime + duration;
+            let timer;
+
+            function run() {
+                const now = new Date().getTime();
+                const remaining = Math.max((endTime - now) / duration, 0);
+                const value = Math.round(end - (remaining * range));
+                element.innerHTML = value.toLocaleString();
+                if (value === end) {
+                    clearInterval(timer);
+                }
+            }
+
+            timer = setInterval(run, stepTime);
+            run();
+        }
+    </script>
 </section>
