@@ -1,9 +1,9 @@
 ---
 const stats = [
-    { title: 'Organic Reach (Global)', count: '3835039', description: 'Organic Reach' },
-    { title: 'Campaigns', count: '85', description: 'Successful campaigns' },
-    { title: 'Watch Hours (Asia)', count: '14081', description: 'Total watch hours in Asia' },
-    { title: 'Excellent CTR % (Asia)', count: '17', description: 'Click-through rate in Asia' }
+    { title: 'Organic Reach (Global)', count: '3835039' },
+    { title: 'Campaigns', count: '85' },
+    { title: 'Watch Hours (Asia)', count: '14081' },
+    { title: 'Excellent CTR % (Asia)', count: '17' }
 ];
 ---
 
@@ -17,7 +17,6 @@ const stats = [
                 <div class="stat-box" key={index}>
                     <h3 class="count" data-count={stat.count}>{stat.count}</h3>
                     <p class="title">{stat.title}</p>
-                    <p class="description">{stat.description}</p>
                 </div>
             ))}
         </div>
@@ -28,19 +27,20 @@ const stats = [
         .statistics-section {
             background-color: #f9f9f9;
             text-align: center;
+            padding: 20px; /* Add padding for better spacing */
         }
 
         .container {
             display: flex;
-            max-width: 1200px; /* Set the maximum width for the container */
-            margin: 0 auto; /* Center the container */
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: flex-start;
             box-sizing: border-box;
         }
 
         .image-container, .stats-container {
-            flex: 1;
+            width: 100%;
             padding: 10px;
             box-sizing: border-box;
         }
@@ -57,17 +57,15 @@ const stats = [
 
         .stats-container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+            flex-direction: column;
             align-items: flex-start;
             gap: 20px;
         }
 
         .stat-box {
+            width: 100%;
+            text-align: left;
             padding: 20px;
-            flex: 1 1 calc(25% - 20px); /* Responsive layout with gap */
-            min-width: 200px; /* Ensure minimum width */
-            text-align: center;
             transition: transform 0.3s ease;
         }
 
@@ -86,13 +84,6 @@ const stats = [
             font-family: 'Open Sans', sans-serif;
         }
 
-        .stat-box p.description {
-            font-size: 0.875rem;
-            color: #999;
-            margin-top: 5px;
-            font-family: 'Open Sans', sans-serif;
-        }
-
         /* Animation keyframes */
         @keyframes countUp {
             0% {
@@ -106,6 +97,28 @@ const stats = [
         .count {
             display: inline-block;
             animation: countUp 2s ease-out forwards;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .stats-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .stat-box {
+                flex: 1 1 calc(25% - 20px);
+                min-width: 200px;
+                text-align: center;
+            }
         }
     </style>
     <script>

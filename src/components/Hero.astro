@@ -18,14 +18,15 @@ const clients = [
             <p class="animate-paragraph">{subtitle}</p>
             <button class="start-button animate-button">Get Started</button>
         </div>
+
         <div class="image-content">
             <img class="animated-image" src="../public/images/hero-img.png" alt="Animated Image">
-        </div>
+        </div>  
     </div>
     <div class="client-section">
         <div class="client-logos">
             {clients.map(client => (
-                <img src={client.src} alt={client.alt} class="client-logo" />
+                <img src={client.src} alt={client.alt} class="client-logo animate-logo" />
             ))}
         </div>
     </div>
@@ -35,13 +36,12 @@ const clients = [
     .hero-section {
         background: white;
         width: 100%;
-        
     }
 
     .hero-container {
         display: flex;
+        height: 70vh;
         align-items: center;
-        justify-content: space-between;
         padding: 20px;
         background-color: #ffffff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -49,8 +49,8 @@ const clients = [
     }
 
     .text-content {
-        flex: 1;
-        padding-right: 20px;
+        text-align: left;
+        padding: 20px;
         margin-left: 7rem;
     }
 
@@ -59,14 +59,14 @@ const clients = [
         margin-bottom: 10px;
         color: rgb(20, 39, 155);
         font-family: Raleway, sans-serif;
-        opacity: 0; /* Start with invisible */
+        opacity: 0; 
     }
 
     .text-content p {
-        font-size: 1.60rem;
+        font-size: 1.2rem;
         line-height: 1.2;
         color: rgb(72, 72, 72);
-        opacity: 0; /* Start with invisible */
+        opacity: 0; 
     }
 
     .start-button {
@@ -74,12 +74,12 @@ const clients = [
         padding: 10px 20px;
         background-color: #f3f5f8;
         color: #162be8;
-        font-size: 1.25rem;
+        font-size: 1rem;
         border: 2px solid #162be8;
         cursor: pointer;
         border-radius: 50px;
         transition: background-color 0.3s ease;
-        opacity: 0; /* Start with invisible */
+        opacity: 0; 
     }
 
     .start-button:hover {
@@ -88,35 +88,36 @@ const clients = [
     }
 
     .image-content {
-        flex: 1;
         text-align: center;
-        position: relative;
+        margin-bottom: 20px;
+        margin-right: 7rem;
     }
 
     .animated-image {
-        margin-right: 7rem;
         max-width: 100%;
         height: auto;
         display: block;
-        animation: slideInRight 1s ease-out forwards;
+        animation: floatUpDown 3s ease-in-out 1s infinite;
         opacity: 0; /* Start with invisible */
     }
 
     .client-section {
-        padding: 20px 0; /* Add padding to the top and bottom */
+        padding: 20px 0;
         background-color: rgb(243, 249, 253);
     }
 
     .client-logos {
         display: flex;
         justify-content: center;
-        align-items: center;
         justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.5;
-        margin: 0 auto; /* Center the logos horizontally */
-        max-width: 80%; /* Restrict the width of the logos container */
+        margin: 0 auto;
+        max-width: 80%;
     }
 
     .client-logo {
@@ -124,6 +125,8 @@ const clients = [
         height: auto;
         filter: grayscale(100%);
         transition: filter 0.3s ease;
+        opacity: 0; /* Start with invisible */
+        transform: scale(0.5); /* Start with smaller size */
     }
 
     .client-logo:hover {
@@ -152,6 +155,29 @@ const clients = [
         }
     }
 
+    @keyframes floatUpDown {
+        0% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes popUp {
+        0% {
+            transform: scale(0.5);
+            opacity: 0;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
     /* Apply animations */
     .animate-heading {
         animation: slideInBottom 1s ease-out forwards;
@@ -159,16 +185,66 @@ const clients = [
 
     .animate-paragraph {
         animation: slideInBottom 1s ease-out forwards;
-        animation-delay: 0.5s; /* Optional: Add delay for the paragraph animation */
     }
 
     .animate-button {
         animation: slideInBottom 1s ease-out forwards;
-        animation-delay: 1s; /* Optional: Add delay for the button animation */
     }
 
     .animated-image {
         animation-delay: 0.5s;
     }
+
+    .animate-logo {
+        animation: popUp 0.5s ease-out forwards;
+    }
+
+    @media (max-width: 767px) {
+    .hero-container {
+        flex-direction: column-reverse; /* Vertical layout for smaller screens */
+        height: auto;
+    }
+
+    .text-content {
+        margin-left: 0;
+    }
+
+    .text-content h1 {
+        font-size: 2rem;
+    }
+
+    .text-content p {
+        font-size: 1rem;
+    }
+}
+
     </style>
 </section>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const elementsToAnimate = document.querySelectorAll('.animate-heading, .animate-paragraph, .animate-button, .animated-image, .client-logo');
+        
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const element = entry.target as HTMLElement;
+                if (entry.isIntersecting) {
+                    element.style.opacity = '1';
+                    element.style.animationPlayState = 'running';
+                } else {
+                    element.style.opacity = '0';
+                    element.style.animationPlayState = 'paused';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        elementsToAnimate.forEach(element => {
+            const el = element as HTMLElement;
+            el.style.opacity = '0';
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    });
+</script>

@@ -1,4 +1,5 @@
 ---
+import Heading from '../components/Heading.astro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLaptopCode, faCode, faBullhorn, faTv, faSearch, faLightbulb, faMapMarkerAlt, faChartLine, faAddressBook, faPhotoVideo, faCalendarAlt, faRedo } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,9 +19,9 @@ const features = [
   { title: 'Ad retargeting', icon: faRedo, colour:"#29cc61" }
 ];
 ---
-
+<h2 class="animate-heading"><Heading /></h2>
 <section class="features-section">
-  <h2 class="animate-heading">OUR CORE FEATURES</h2>
+  
   <p class="animate-paragraph" id="para">Akeshya is a forward-thinking and intelligent design firm that is technically and creatively capable of transforming your brand into its best digital self. Our approach to design and development results in compelling, engaging branding and immersive digital experiences that provide a value for money.</p>
   <div class="features-grid">
     {features.map((feature, index) => (

@@ -12,13 +12,13 @@
             margin: 20px 0;
         }
         .heading-line {
-            flex-grow: 1;
-            height: 1px;
-            background-color: #000;
+            width: 5%; /* Adjusted line width */
+            height: 2px;
+            background-color: #0d17cf;
             margin: 0 10px;
         }
         .heading-text {
-            font-size: 24px;
+            font-size: 40px;
             font-weight: bold;
             text-align: center;
         }
@@ -26,13 +26,13 @@
 </head>
 <body>
 
-<custom-heading text="ABOUT US"></custom-heading>
-<custom-heading text="SERVICES"></custom-heading>
-<custom-heading text="OUR PROCESS"></custom-heading>
-<custom-heading text="OUR CORE FEATURES"></custom-heading>
-<custom-heading text="CONTACT"></custom-heading>
+<custom-heading></custom-heading>
+
 
 <script>
+    const headings = ["ABOUT US", "SERVICES", "OUR PROCESS", "OUR CORE FEATURES", "CONTACT"];
+    let headingIndex = 0;
+
     class CustomHeading extends HTMLElement {
         constructor() {
             super();
@@ -46,7 +46,8 @@
 
             const text = document.createElement('div');
             text.className = 'heading-text';
-            text.textContent = this.getAttribute('text');
+            text.textContent = headings[headingIndex % headings.length];
+            headingIndex++; // Increment the index for the next heading
 
             const line2 = document.createElement('div');
             line2.className = 'heading-line';
@@ -64,7 +65,7 @@
                     margin: 20px 0;
                 }
                 .heading-line {
-                    flex-grow: 1;
+                    width: 7%; /* Adjusted line width */
                     height: 1px;
                     background-color: #000;
                     margin: 0 10px;
@@ -86,3 +87,11 @@
 
 </body>
 </html>
+
+
+<!--
+<custom-heading></custom-heading>
+<custom-heading></custom-heading>
+<custom-heading></custom-heading>
+<custom-heading></custom-heading>
+ -->

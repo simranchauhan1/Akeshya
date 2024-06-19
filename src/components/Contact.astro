@@ -1,6 +1,7 @@
 <!-- src/components/ContactUs.astro -->
 
 ---
+import Heading from '../components/Heading.astro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,8 +13,8 @@ const email = 'info@akeshya.com';
 const phone = '+91 94942 40922';
 ---
 
-<section class="contact-us-section">
-    <h2>{title}</h2>
+<section class="contact-us-section" id="contact">
+    <h2><Heading /></h2>
     <div class="contact-us-container">
         <div class="contact-box">
             <h3>{companyName}</h3>

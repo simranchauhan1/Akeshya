@@ -1,6 +1,7 @@
 <!-- src/components/Services.astro -->
 
 ---
+import Heading from '../components/Heading.astro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPalette, faCode, faBullhorn, faLifeRing } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,12 +15,12 @@ const services = [
 ];
 ---
 
-<section class="services-section">
-    <h2>{title}</h2>
+<section class="services-section" id="service">
+    <h2><Heading /></h2>
     <p class="services-description">{description}</p>
     <div class="services-container">
-        {services.map(service => (
-            <div class="service-box">
+        {services.map((service, index) => (
+            <div class="service-box" data-index={index}>
                 <FontAwesomeIcon icon={service.icon} className="service-icon" />
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
@@ -27,12 +28,12 @@ const services = [
         ))}
     </div>
 
-<!-- CSS Styles -->
+    <!-- CSS Styles -->
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
-        
+
         .services-section {
             background-color: #f9f9f9;
             padding: 40px 20px;
@@ -62,10 +63,18 @@ const services = [
             min-width: 200px; /* Ensure minimum width */
             text-align: left;
             max-width: 250px;
-            transition: background-color 0.3s ease;
+            opacity: 0; /* Initial opacity for animation */
+            transform: translateY(50px); /* Initial position for animation */
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .service-box:hover  {
+        .service-box.visible {
+            opacity: 1;
+            transition: opacity 0.3 ease;
+            transform: translateY(0); /* Final position */
+        }
+
+        .service-box:hover {
             background-color: #1f19d4; /* Blue color */
             color: #fff; /* White text */
         }
@@ -92,7 +101,7 @@ const services = [
         .service-icon {
             height: 1.5rem;
             font-size: 2rem;
-            color:#1f19d4 ;
+            color: #1f19d4;
             margin-bottom: 10px;
             border: 10px solid #1f19d4; /* Thick border */
             border-radius: 50%; /* Circular border */
@@ -101,6 +110,41 @@ const services = [
 
         .service-box:hover .service-icon {
             color: #fff; /* White icon on hover */
+            border: 10px solid #fff;
+        }
+
+        /* Animation delay */
+        .service-box[data-index="0"] {
+            transition-delay: 0.1s;
+        }
+
+        .service-box[data-index="1"] {
+            transition-delay: 0.3s;
+        }
+
+        .service-box[data-index="2"] {
+            transition-delay: 0.5s;
+        }
+
+        .service-box[data-index="3"] {
+            transition-delay: 0.7s;
         }
     </style>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.service-box').forEach(box => {
+            observer.observe(box);
+        });
+    });
+</script>

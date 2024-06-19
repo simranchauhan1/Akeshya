@@ -1,4 +1,5 @@
 ---
+import Heading from '../components/Heading.astro';
 const steps = [
     { title: 'Planning', description: "We help you turn all of your ideas into a digital product that meets all of your requirements. We begin each project by determining its scope and needs. This is done by collaborating closely with you to ensure that we're all on the same page." },
     { title: 'Design', description: "We help you turn all of your ideas into a digital product that meets all of your requirements. We begin each project by determining its scope and needs. This is done by collaborating closely with you to ensure that we're all on the same page. " },
@@ -7,12 +8,12 @@ const steps = [
 ];
 ---
 
-<section class="process-section">
-    <h2>OUR PROCESS</h2>
+<section class="process-section" id="process-section">
+    <h2><Heading /></h2>
     <p class="process-description">Over the years we’ve evolved a tested method for attaining achievement for each one of our clients.</p>
     <div class="process-grid">
         {steps.map((step, index) => (
-            <div class={`process-box animate-box animate-delay-${index}`}>
+            <div class={`process-box animate-box animate-delay-${index}`} key={index}>
                 <h3>{step.title}</h3>
                 <p>{step.description}</p>
             </div>
@@ -37,16 +38,16 @@ const steps = [
         .process-description {
             font-size: 1.2rem;
             color: #666666;
-            margin-bottom: 6rem; /* Increased margin-bottom for more distance */
+            margin-bottom: 3rem; /* Adjusted margin-bottom */
             font-family: Raleway, sans-serif;
         }
 
         .process-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* Adjusted minmax function */
-            gap: 6rem; /* Increased gap between divs */
+            grid-template-columns: 1fr; /* Default to single column */
+            gap: 2rem;
             margin: 0 auto;
-            max-width: 1200px; /* Increased max-width */
+            max-width: 1200px;
         }
 
         .process-box {
@@ -73,18 +74,18 @@ const steps = [
         .process-box:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            background-color: #1430a0; /* Change background color on hover */
-            color: #ffffff; /* Change text color on hover */
+            background-color: #1430a0;
+            color: #ffffff;
         }
 
         .process-box:hover h3,
         .process-box:hover p {
-            color: #ffffff; /* Ensure text color changes to white on hover */
+            color: #ffffff;
         }
 
         @keyframes slideInBottom {
             0% {
-                transform: translateY(100%);
+                transform: translateY(50px);
                 opacity: 0;
             }
             100% {
@@ -93,26 +94,63 @@ const steps = [
             }
         }
 
-        /* Apply animations with delays */
         .animate-box {
-            animation: slideInBottom 1s ease-out forwards;
-            opacity: 0; /* Start with invisible */
+            opacity: 0;
         }
 
         .animate-delay-0 {
+            animation: slideInBottom 1s ease-out forwards;
             animation-delay: 0.2s;
         }
 
         .animate-delay-1 {
+            animation: slideInBottom 1s ease-out forwards;
             animation-delay: 0.4s;
         }
 
         .animate-delay-2 {
+            animation: slideInBottom 1s ease-out forwards;
             animation-delay: 0.6s;
         }
 
         .animate-delay-3 {
+            animation: slideInBottom 1s ease-out forwards;
             animation-delay: 0.8s;
         }
+
+        @media (min-width: 768px) {
+            .process-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Multiple columns on larger screens */
+                gap: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .process-description {
+                margin-bottom: 6rem; /* Increased margin-bottom for larger screens */
+            }
+            .process-grid {
+                gap: 3rem; /* Increased gap for larger screens */
+            }
+        }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const processSection = document.querySelector('#process-section');
+            const processBoxes = document.querySelectorAll('.process-box');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            processBoxes.forEach(box => {
+                observer.observe(box);
+            });
+        });
+    </script>
 </section>
