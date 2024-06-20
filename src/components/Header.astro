@@ -1,8 +1,5 @@
 ---
-// src/components/Header.astro
-
 const logoSrc = "../public/images/logo.png";
-
 ---
 
 <header class="header">
@@ -16,24 +13,45 @@ const logoSrc = "../public/images/logo.png";
     <a href="#service" class="nav-link">Services</a>
     <a href="#contact" class="nav-link">Contact Us</a>
   </nav>
+  <div class="hamburger" id="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/" class="mobile-nav-link">Home</a>
+    <a href="#about" class="mobile-nav-link">About</a>
+    <a href="#service" class="mobile-nav-link">Services</a>
+    <a href="#contact" class="mobile-nav-link">Contact Us</a>
+  </div>
 </header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    hamburger.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+    });
+  });
+</script>
 
 <!--CSS Styling -->
 <style>
-
-     /* Import Google Fonts */
+  /* Import Google Fonts */
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
-/* Apply the font to the entire body */
-body {
-  font-family: 'Open Sans', sans-serif;
-}
+  /* Apply the font to the entire body */
+  body {
+    font-family: 'Open Sans', sans-serif;
+  }
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 1rem; /* Reduce padding */
+    padding: 0.75rem 1rem;
     background-color: #f8f9fa;
     height: 60px;
   }
@@ -42,24 +60,26 @@ body {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    margin-left: 4rem; /* Move the brand name and logo to the right */
+    margin-left: 4rem;
   }
 
   .logo {
-    height: 80px; 
+    height: 80px;
     margin-right: 0.5rem;
+    transition: height 0.3s ease;
   }
 
   .brand-name {
-    font-size: 2rem; /* Reduce font size */
+    font-size: 2rem;
     font-weight: bold;
     color: #14279b;
     font-family: "Open Sans", sans-serif;
+    transition: font-size 0.3s ease;
   }
 
   .header-right {
     display: flex;
-    gap: 1rem; /* Reduce gap between links */
+    gap: 1rem;
     margin-right: 5rem;
   }
 
@@ -68,14 +88,101 @@ body {
     color: #444444;
     font-weight: 500;
     transition: color 0.3s ease;
-    font-size: 1rem; /* Reduce font size */
-    padding: 0.25rem 0.5rem; /* Reduce padding */
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
   }
 
   .nav-link:hover {
-    color:  #14279b;
+    color: #14279b;
   }
 
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
 
+  .bar {
+    height: 3px;
+    width: 25px;
+    background-color: #444444;
+    margin: 4px 0;
+    transition: all 0.3s ease;
+  }
 
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 1rem;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    z-index: 1000;
+  }
+
+  .mobile-nav-link {
+    text-decoration: none;
+    color: #444444;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+  }
+
+  .mobile-menu.open {
+    display: flex;
+  }
+
+  @media (max-width: 1024px) {
+    .logo {
+      height: 60px;
+    }
+
+    .brand-name {
+      font-size: 1.5rem;
+    }
+
+    .header-left {
+      margin-left: 2rem;
+    }
+
+    .header-right {
+      margin-right: 3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-right {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .header-left {
+      margin-left: 1rem;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .brand-name {
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo {
+      height: 40px;
+    }
+
+    .brand-name {
+      font-size: 1rem;
+    }
+  }
 </style>
